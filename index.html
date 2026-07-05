@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; style-src * 'unsafe-inline';">
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; style-src * 'unsafe-inline'; media-src *;">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🎉 热烈祝贺冯佳敏 - 金榜题名</title>
     <style>
@@ -79,6 +79,17 @@
         .modal-content { background: var(--card-bg); border: 2px solid rgba(212,168,67,0.5); border-radius: 20px; padding: 2rem; max-width: 500px; width: 100%; text-align: center; backdrop-filter: blur(20px); box-shadow: 0 20px 50px rgba(0,0,0,0.6); position: relative; }
         .share-text-box { background: rgba(20,10,5,0.8); border: 1px solid rgba(212,168,67,0.5); border-radius: 12px; padding: 1rem; color: #f0d78c; margin: 1rem 0; font-size: 0.95rem; line-height: 1.6; word-break: break-all; user-select: text; }
         @media (max-width: 600px) { .hero-card { padding: 2rem 1.5rem; } .name-display { font-size: 2.2rem; } .btn { padding: 0.55rem 1.2rem; font-size: 0.85rem; } }
+
+        /* 音乐开关 */
+        .music-toggle {
+            position: fixed; bottom: 20px; right: 20px; z-index: 400;
+            background: rgba(0,0,0,0.6); border: 1px solid var(--gold-light);
+            color: var(--gold-light); padding: 10px; border-radius: 50%;
+            cursor: pointer; font-size: 1.4rem; transition: all 0.3s;
+            backdrop-filter: blur(8px); line-height: 1;
+        }
+        .music-toggle:hover { background: rgba(30,20,10,0.8); transform: scale(1.1); }
+        .music-toggle.off { opacity: 0.5; border-color: rgba(255,255,255,0.3); }
     </style>
 </head>
 <body>
@@ -86,6 +97,9 @@
     <canvas id="fireworksCanvas"></canvas>
     <div class="petals-container" id="petalsContainer"></div>
     <div class="toast" id="toast"></div>
+
+    <!-- 音乐开关按钮 -->
+    <div class="music-toggle off" id="musicBtn" onclick="toggleMusic()" title="音乐关">🔇</div>
 
     <div class="main-container">
         <div class="top-ornament"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
@@ -110,6 +124,7 @@
         <p style="font-size:0.8rem;color:rgba(200,180,150,0.5);letter-spacing:0.08em;">— 全家为你骄傲 · 2026 —</p>
     </div>
 
+    <!-- 分享弹窗 -->
     <div id="shareModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:50;background:rgba(0,0,0,0.75);justify-content:center;align-items:center;padding:1rem;">
         <div class="modal-content">
             <button onclick="closeShareModal()" style="position:absolute;top:12px;right:16px;background:none;border:none;color:var(--gold-light);font-size:1.5rem;cursor:pointer;">✕</button>
@@ -120,6 +135,7 @@
         </div>
     </div>
 
+    <!-- 祝福墙弹窗 -->
     <div id="blessingModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:50;background:rgba(0,0,0,0.75);justify-content:center;align-items:center;padding:1rem;">
         <div class="modal-content">
             <button onclick="closeBlessingWall()" style="position:absolute;top:12px;right:16px;background:none;border:none;color:var(--gold-light);font-size:1.5rem;cursor:pointer;">✕</button>
@@ -137,6 +153,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
+        // Supabase
         const SUPABASE_URL = 'https://mikhclpvqcwhrpjhfjgi.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_0nT16pm_-1xtxD-B4vzq2g_KrGc4tDc';
         const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -151,11 +168,46 @@
         const blessingInput = document.getElementById('blessingInput');
         const presetPanel = document.getElementById('presetPanel');
         const blessingList = document.getElementById('blessingList');
+        const musicBtn = document.getElementById('musicBtn');
 
         let bgParticles = [], w, h, toastTimer;
-        const fireworks = []; // 活跃烟花列表
+        const fireworks = [];
         let fwAnimFrame = null;
 
+        // 音频
+        const bgm = new Audio('bgm.mp3');
+        bgm.loop = true;
+        bgm.volume = 0.3;
+        const fireworkSound = new Audio('firework.mp3');
+        fireworkSound.volume = 0.8;
+
+        let musicOn = false;
+
+        function toggleMusic() {
+            musicOn = !musicOn;
+            if (musicOn) {
+                bgm.play().catch(() => {});
+                musicBtn.textContent = '🔊';
+                musicBtn.classList.remove('off');
+            } else {
+                bgm.pause();
+                musicBtn.textContent = '🔇';
+                musicBtn.classList.add('off');
+            }
+        }
+
+        // 首次用户交互启动音乐（规避自动播放限制）
+        function tryStartMusic() {
+            if (!musicOn) {
+                musicOn = true;
+                bgm.play().catch(() => {});
+                musicBtn.textContent = '🔊';
+                musicBtn.classList.remove('off');
+            }
+        }
+        document.body.addEventListener('click', tryStartMusic, { once: true });
+
+        // Canvas尺寸
         function resizeCanvas() {
             w = bgCanvas.width = fwCanvas.width = window.innerWidth;
             h = bgCanvas.height = fwCanvas.height = window.innerHeight;
@@ -196,18 +248,18 @@
         for (let i=0;i<20;i++) setTimeout(createPetal, i*350);
         setInterval(() => { if(petalsContainer.children.length<35) createPetal(); }, 1800);
 
-        // ==================== 全新烟花：底部发射，升空爆炸 ====================
+        // 烟花
         function createFirework() {
-            const x_start = Math.random() * w * 0.8 + w * 0.1; // 底部随机位置
+            const x_start = Math.random() * w * 0.8 + w * 0.1;
             const y_start = h + 20;
-            const x_target = x_start + (Math.random() - 0.5) * 100; // 目标位置微调
-            const y_target = Math.random() * h * 0.35 + h * 0.15; // 屏幕中上部
+            const x_target = x_start + (Math.random() - 0.5) * 100;
+            const y_target = Math.random() * h * 0.35 + h * 0.15;
             return {
                 phase: 'rising',
                 x_start, y_start, x_target, y_target,
                 startTime: performance.now(),
-                riseDuration: 1000, // 上升1秒
-                explodeDuration: 3500, // 爆炸3.5秒
+                riseDuration: 1000,
+                explodeDuration: 3500,
                 particles: [],
                 color: [`hsl(${Math.random()*30+15},95%,65%)`,`hsl(${Math.random()*20+350},90%,60%)`,`hsl(${Math.random()*15+40},100%,70%)`,`hsl(${Math.random()*10+10},90%,55%)`][Math.floor(Math.random()*4)],
             };
@@ -217,28 +269,25 @@
             fireworks.push(createFirework());
             petalsContainer.style.display = 'none';
             if (!fwAnimFrame) fwAnimFrame = requestAnimationFrame(animateFireworks);
+            // 播放烟花音效（克隆避免重叠冲突）
+            const clone = fireworkSound.cloneNode();
+            clone.play().catch(() => {});
             showToast('🎆 烟花发射！');
         }
 
         function animateFireworks(now) {
             fwCtx.clearRect(0, 0, w, h);
             let anyActive = false;
-
             for (let i = fireworks.length - 1; i >= 0; i--) {
                 const fw = fireworks[i];
                 const elapsed = now - fw.startTime;
-
                 if (fw.phase === 'rising') {
                     const progress = Math.min(elapsed / fw.riseDuration, 1);
                     const curX = fw.x_start + (fw.x_target - fw.x_start) * progress;
                     const curY = fw.y_start + (fw.y_target - fw.y_start) * progress;
-                    // 绘制上升的光点与拖尾
                     fwCtx.beginPath(); fwCtx.arc(curX, curY, 4, 0, Math.PI*2);
-                    fwCtx.fillStyle = '#fff';
-                    fwCtx.shadowColor = fw.color; fwCtx.shadowBlur = 10;
-                    fwCtx.fill();
-                    fwCtx.shadowBlur = 0;
-                    // 拖尾粒子
+                    fwCtx.fillStyle = '#fff'; fwCtx.shadowColor = fw.color; fwCtx.shadowBlur = 10;
+                    fwCtx.fill(); fwCtx.shadowBlur = 0;
                     for (let j = 0; j < 3; j++) {
                         const trailX = curX + (Math.random() - 0.5) * 8;
                         const trailY = curY + Math.random() * 12;
@@ -246,7 +295,6 @@
                         fwCtx.fillStyle = fw.color; fwCtx.fill();
                     }
                     if (progress >= 1) {
-                        // 切换为爆炸
                         fw.phase = 'exploding';
                         fw.explodeStart = now;
                         const count = 220 + Math.floor(Math.random() * 120);
@@ -265,10 +313,7 @@
                 } else if (fw.phase === 'exploding') {
                     const explodeElapsed = now - fw.explodeStart;
                     const explodeProgress = explodeElapsed / fw.explodeDuration;
-                    if (explodeProgress >= 1) {
-                        fireworks.splice(i, 1);
-                        continue;
-                    }
+                    if (explodeProgress >= 1) { fireworks.splice(i, 1); continue; }
                     fw.particles.forEach(p => {
                         p.x += p.vx * (1 - explodeProgress * 0.2);
                         p.y += p.vy * (1 - explodeProgress * 0.2);
@@ -287,7 +332,6 @@
                     anyActive = true;
                 }
             }
-
             if (anyActive) {
                 fwAnimFrame = requestAnimationFrame(animateFireworks);
             } else {
