@@ -415,7 +415,7 @@
             <span class="line"></span>
         </div>
         <p style="font-size:0.8rem;color:rgba(200,180,150,0.5);letter-spacing:0.08em;">
-            — 全家为你骄傲 · 2024 —
+            — 全家为你骄傲 · 2026 —
         </p>
     </div>
 
@@ -460,7 +460,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <script>
-        // ==================== 全局变量（仅声明一次） ====================
         const SUPABASE_URL = 'https://mikhclpvqcwhrpjhfjgi.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_0nT16pm_-1xtxD-B4vzq2g_KrGc4tDc';
         const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -476,7 +475,6 @@
 
         let particles = [], w, h, toastTimer;
 
-        // ==================== 粒子背景 ====================
         function resizeCanvas() {
             w = canvas.width = window.innerWidth;
             h = canvas.height = window.innerHeight;
@@ -520,7 +518,6 @@
             requestAnimationFrame(animate);
         })();
 
-        // ==================== 飘落花瓣 ====================
         const petalChars = ['🌸','🌺','💮','🏵️','🌷','✿','❀','🌼','🍂','✨'];
         function createPetal() {
             const petal = document.createElement('span');
@@ -536,7 +533,6 @@
         for (let i=0;i<20;i++) setTimeout(createPetal, i*350);
         setInterval(() => { if(petalsContainer.children.length<35) createPetal(); }, 1800);
 
-        // ==================== 烟花 ====================
         function triggerCelebration() {
             for (let i=0;i<8;i++) {
                 const fw = { x:Math.random()*w*0.7+w*0.15, y:Math.random()*h*0.55+h*0.08, particles:[], life:0, maxLife:80, color:[`hsl(${Math.random()*30+15},90%,60%)`,`hsl(${Math.random()*20+350},85%,55%)`,`hsl(${Math.random()*15+40},95%,65%)`][Math.floor(Math.random()*3)] };
@@ -554,7 +550,6 @@
             showToast('🎆 烟花绽放！祝贺佳敏姐！');
         }
 
-        // ==================== Toast ====================
         function showToast(msg) {
             clearTimeout(toastTimer);
             toastEl.textContent = msg;
@@ -562,7 +557,6 @@
             toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2200);
         }
 
-        // ==================== 分享弹窗 ====================
         const shareText = '热烈祝贺冯佳敏考上社会保险中心！金榜题名，前程似锦！';
         function openShareModal() { document.getElementById('shareModal').style.display='flex'; for(let i=0;i<6;i++) setTimeout(createPetal,i*50); }
         function closeShareModal() { document.getElementById('shareModal').style.display='none'; }
@@ -572,7 +566,6 @@
         }
         document.getElementById('shareModal').addEventListener('click', e => { if(e.target===e.currentTarget) closeShareModal(); });
 
-        // ==================== 祝福墙 ====================
         const presetBlessings = [
             "祝你工作顺利，步步高升  ---- ",
             "愿你在社保中心发光发热，前程似锦  ---- ",
