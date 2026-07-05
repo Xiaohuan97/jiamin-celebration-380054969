@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; style-src * 'unsafe-inline';">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🎉 热烈祝贺冯佳敏 - 金榜题名</title>
     <style>
@@ -35,7 +36,6 @@
             pointer-events: none;
         }
 
-        /* 烟花专用层 - 放在最上面 */
         #fireworksCanvas {
             position: fixed;
             top: 0; left: 0;
@@ -227,7 +227,7 @@
             100% { transform: translateY(105vh) rotate(480deg) translateX(-10px); opacity: 0; }
         }
 
-        .preset-panel { /* ...省略保持原有... */
+        .preset-panel {
             position: absolute; bottom: calc(100% + 8px); left: 0; right: 0;
             background: rgba(30, 15, 10, 0.95); border: 1px solid rgba(212,168,67,0.6);
             border-radius: 16px; box-shadow: 0 15px 30px rgba(0,0,0,0.6);
@@ -268,9 +268,7 @@
     </style>
 </head>
 <body>
-    <!-- 背景粒子 -->
     <canvas id="particlesCanvas"></canvas>
-    <!-- 烟花专用层 - 放在最上面 -->
     <canvas id="fireworksCanvas"></canvas>
     <div class="petals-container" id="petalsContainer"></div>
     <div class="toast" id="toast"></div>
@@ -370,12 +368,10 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <script>
-        // Supabase
         const SUPABASE_URL = 'https://mikhclpvqcwhrpjhfjgi.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_0nT16pm_-1xtxD-B4vzq2g_KrGc4tDc';
         const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        // DOM 元素
         const bgCanvas = document.getElementById('particlesCanvas');
         const bgCtx = bgCanvas.getContext('2d');
         const fwCanvas = document.getElementById('fireworksCanvas');
@@ -389,7 +385,6 @@
 
         let bgParticles = [], w, h, toastTimer;
 
-        // ==================== 背景粒子 ====================
         function resizeCanvas() {
             w = bgCanvas.width = fwCanvas.width = window.innerWidth;
             h = bgCanvas.height = fwCanvas.height = window.innerHeight;
@@ -433,7 +428,6 @@
             requestAnimationFrame(animateBg);
         })();
 
-        // ==================== 花瓣 ====================
         const petalChars = ['🌸','🌺','💮','🏵️','🌷','✿','❀','🌼','🍂','✨'];
         function createPetal() {
             const petal = document.createElement('span');
@@ -449,32 +443,21 @@
         for (let i=0;i<20;i++) setTimeout(createPetal, i*350);
         setInterval(() => { if(petalsContainer.children.length<35) createPetal(); }, 1800);
 
-        // ==================== 超级烟花（上层绘制，暂停花瓣） ====================
-        let fireworksActive = false;
-
+        // 烟花
         function triggerCelebration() {
-            // 暂停花瓣飘落
             petalsContainer.style.display = 'none';
-            fireworksActive = true;
-
-            const centerX = w / 2;
-            const centerY = h / 2;
+            const centerX = w / 2, centerY = h / 2;
             const fireworks = [];
-
-            // 4组大型烟花，稍大一些但不过分
             for (let i = 0; i < 4; i++) {
                 const offsetX = (Math.random() - 0.5) * w * 0.5;
                 const offsetY = (Math.random() - 0.5) * h * 0.4;
                 const fw = {
-                    x: centerX + offsetX,
-                    y: centerY + offsetY,
-                    particles: [],
-                    startTime: performance.now(),
-                    duration: 5000 + Math.random() * 1000,
+                    x: centerX + offsetX, y: centerY + offsetY, particles: [],
+                    startTime: performance.now(), duration: 5000 + Math.random() * 1000,
                     color: [`hsl(${Math.random()*30+15},95%,65%)`,`hsl(${Math.random()*20+350},90%,60%)`,`hsl(${Math.random()*15+40},100%,70%)`,`hsl(${Math.random()*10+10},90%,55%)`][Math.floor(Math.random()*4)],
                 };
-                const particleCount = 250 + Math.floor(Math.random() * 150);
-                for (let j = 0; j < particleCount; j++) {
+                const count = 250 + Math.floor(Math.random() * 150);
+                for (let j = 0; j < count; j++) {
                     const angle = Math.random() * Math.PI * 2;
                     const speed = Math.random() * 10 + 3;
                     fw.particles.push({
@@ -487,7 +470,6 @@
                 }
                 fireworks.push(fw);
             }
-
             function drawFireworks(now) {
                 fwCtx.clearRect(0, 0, w, h);
                 let active = false;
@@ -502,12 +484,10 @@
                         p.vy += 0.03;
                         p.life -= p.decay;
                         if (p.life > 0) {
-                            fwCtx.beginPath();
-                            fwCtx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+                            fwCtx.beginPath(); fwCtx.arc(p.x, p.y, p.size, 0, Math.PI*2);
                             fwCtx.fillStyle = fw.color.replace(')', `, ${p.life})`).replace('hsl', 'hsla');
                             fwCtx.fill();
-                            fwCtx.beginPath();
-                            fwCtx.arc(p.x, p.y, p.size*2.2, 0, Math.PI*2);
+                            fwCtx.beginPath(); fwCtx.arc(p.x, p.y, p.size*2.2, 0, Math.PI*2);
                             fwCtx.fillStyle = fw.color.replace(')', `, ${p.life*0.25})`).replace('hsl', 'hsla');
                             fwCtx.fill();
                         }
@@ -517,20 +497,15 @@
                 if (active) {
                     requestAnimationFrame(drawFireworks);
                 } else {
-                    // 烟花结束，恢复花瓣
                     petalsContainer.style.display = '';
-                    fireworksActive = false;
-                    // 额外生成一些花瓣
                     for(let i=0;i<15;i++) setTimeout(createPetal, i*80);
                 }
             }
-
             requestAnimationFrame(drawFireworks);
             for(let i=0;i<20;i++) setTimeout(createPetal, i*60);
             showToast('🎆 烟花绽放！祝贺佳敏！');
         }
 
-        // ==================== Toast ====================
         function showToast(msg) {
             clearTimeout(toastTimer);
             toastEl.textContent = msg;
@@ -538,7 +513,6 @@
             toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2200);
         }
 
-        // ==================== 分享 ====================
         const shareText = '热烈祝贺冯佳敏考上社会保险中心！金榜题名，前程似锦！';
         function openShareModal() { document.getElementById('shareModal').style.display='flex'; }
         function closeShareModal() { document.getElementById('shareModal').style.display='none'; }
@@ -548,7 +522,6 @@
         }
         document.getElementById('shareModal').addEventListener('click', e => { if(e.target===e.currentTarget) closeShareModal(); });
 
-        // ==================== 祝福墙 ====================
         const presetBlessings = [
             "祝你工作顺利，步步高升  ---- ",
             "愿你在社保中心发光发热，前程似锦  ---- ",
