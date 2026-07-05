@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; style-src * 'unsafe-inline'; media-src *;">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>���� 热烈祝贺冯佳敏 - 金榜题名</title>
+    <title>&#x1F389; 热烈祝贺冯佳敏 - 金榜题名</title>
     <style>
+        /* 样式部分保持不变，此处省略，请从上次完整代码中复制 */
         :root {
             --gold: #d4a843; --gold-light: #f0d78c; --red: #c41e3a;
             --bg: #1a0a0a; --card-bg: rgba(30, 12, 12, 0.85); --text: #f5e6d3;
@@ -96,25 +97,25 @@
     <canvas id="fireworksCanvas"></canvas>
     <div class="petals-container" id="petalsContainer"></div>
     <div class="toast" id="toast"></div>
-    <div class="music-toggle off" id="musicBtn" onclick="toggleMusic()" title="音乐关">����</div>
+    <div class="music-toggle off" id="musicBtn" onclick="toggleMusic()" title="音乐关">&#x1F507;</div>
 
     <div class="main-container">
         <div class="top-ornament"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
         <div class="hero-card" id="heroCard">
-            <span class="corner-badge top-left">����</span><span class="corner-badge top-right">����</span>
-            <span class="corner-badge bottom-left">✨</span><span class="corner-badge bottom-right">✨</span>
-            <div class="label-badge">���� 金 榜 题 名 ����</div>
+            <span class="corner-badge top-left">&#x1F3EE;</span><span class="corner-badge top-right">&#x1F3EE;</span>
+            <span class="corner-badge bottom-left">&#x2728;</span><span class="corner-badge bottom-right">&#x2728;</span>
+            <div class="label-badge">&#x1F38A; 金 榜 题 名 &#x1F38A;</div>
             <div class="name-display">冯 佳 敏</div>
             <div class="congrats-text">热烈祝贺 · 成功上岸</div>
             <div class="sub-text">以梦为马，不负韶华</div>
-            <div class="divider-ornament"><span></span><span class="star">✦</span><span></span></div>
-            <div class="unit-highlight"><span class="icon">����️</span> 社会保险中心</div>
+            <div class="divider-ornament"><span></span><span class="star">&#x2726;</span><span></span></div>
+            <div class="unit-highlight"><span class="icon">&#x1F3DB;&#xFE0F;</span> 社会保险中心</div>
             <p class="blessing-quote">"愿你在这个岗位上发光发热，<br>服务民生，温暖人心。<br>初心如磐，笃行致远，<br>未来可期，前程似锦！"</p>
-            <div class="divider-ornament"><span></span><span class="star">❋</span><span></span></div>
+            <div class="divider-ornament"><span></span><span class="star">&#x274B;</span><span></span></div>
             <div class="action-buttons">
-                <button class="btn btn-primary" onclick="triggerCelebration()">���� 放烟花</button>
-                <button class="btn btn-gold" onclick="openShareModal()">���� 分享喜讯</button>
-                <button class="btn btn-outline" onclick="showBlessingWall()">���� 祝福墙</button>
+                <button class="btn btn-primary" onclick="triggerCelebration()">&#x1F386; 放烟花</button>
+                <button class="btn btn-gold" onclick="openShareModal()">&#x1F4E4; 分享喜讯</button>
+                <button class="btn btn-outline" onclick="showBlessingWall()">&#x1F48C; 祝福墙</button>
             </div>
         </div>
         <div class="top-ornament" style="margin-top:0.5rem;"><span class="line"></span><span class="diamond" style="animation-delay:1s;"></span><span class="line"></span></div>
@@ -123,18 +124,18 @@
 
     <div id="shareModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:50;background:rgba(0,0,0,0.75);justify-content:center;align-items:center;padding:1rem;">
         <div class="modal-content">
-            <button onclick="closeShareModal()" style="position:absolute;top:12px;right:16px;background:none;border:none;color:var(--gold-light);font-size:1.5rem;cursor:pointer;">✕</button>
-            <h3 style="color:var(--gold-light);letter-spacing:0.1em;margin-bottom:0.5rem;">���� 分享喜讯</h3>
+            <button onclick="closeShareModal()" style="position:absolute;top:12px;right:16px;background:none;border:none;color:var(--gold-light);font-size:1.5rem;cursor:pointer;">&#x2715;</button>
+            <h3 style="color:var(--gold-light);letter-spacing:0.1em;margin-bottom:0.5rem;">&#x1F389; 分享喜讯</h3>
             <p style="color:#c9b896;font-size:0.9rem;">复制下方文案，发送给亲朋好友吧～</p>
             <div class="share-text-box" id="shareTextContent">热烈祝贺冯佳敏考上社会保险中心！金榜题名，前程似锦！</div>
-            <button class="btn btn-gold" onclick="copyShareText()" style="margin-top:0.5rem;">���� 复制文案</button>
+            <button class="btn btn-gold" onclick="copyShareText()" style="margin-top:0.5rem;">&#x1F4CB; 复制文案</button>
         </div>
     </div>
 
     <div id="blessingModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:50;background:rgba(0,0,0,0.75);justify-content:center;align-items:center;padding:1rem;">
         <div class="modal-content">
-            <button onclick="closeBlessingWall()" style="position:absolute;top:12px;right:16px;background:none;border:none;color:var(--gold-light);font-size:1.5rem;cursor:pointer;">✕</button>
-            <h3 style="color:var(--gold-light);letter-spacing:0.1em;margin-bottom:1rem;">���� 祝福留言墙</h3>
+            <button onclick="closeBlessingWall()" style="position:absolute;top:12px;right:16px;background:none;border:none;color:var(--gold-light);font-size:1.5rem;cursor:pointer;">&#x2715;</button>
+            <h3 style="color:var(--gold-light);letter-spacing:0.1em;margin-bottom:1rem;">&#x1F48C; 祝福留言墙</h3>
             <div id="blessingList" style="max-height:250px;overflow-y:auto;text-align:left;padding:0.5rem;color:#d5c0a0;font-size:0.9rem;line-height:1.8;"><p style="text-align:center;color:#c9b896;">加载中...</p></div>
             <div style="margin-top:1rem;display:flex;gap:0.5rem;align-items:flex-start;">
                 <div class="input-wrapper" style="flex:1;">
@@ -148,10 +149,12 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
+        // Supabase配置
         const SUPABASE_URL = 'https://mikhclpvqcwhrpjhfjgi.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_0nT16pm_-1xtxD-B4vzq2g_KrGc4tDc';
         const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+        // Canvas元素
         const bgCanvas = document.getElementById('particlesCanvas');
         const bgCtx = bgCanvas.getContext('2d');
         const fwCanvas = document.getElementById('fireworksCanvas');
@@ -168,6 +171,7 @@
         const fireworks = [];
         let fwAnimFrame = null;
 
+        // 音频
         const bgm = new Audio('bgm.mp3');
         bgm.loop = true;
         bgm.volume = 0.3;
@@ -177,14 +181,28 @@
 
         function toggleMusic() {
             musicOn = !musicOn;
-            if (musicOn) { bgm.play().catch(() => {}); musicBtn.textContent = '����'; musicBtn.classList.remove('off'); }
-            else { bgm.pause(); musicBtn.textContent = '����'; musicBtn.classList.add('off'); }
+            if (musicOn) {
+                bgm.play().catch(() => {});
+                musicBtn.innerHTML = '&#x1F50A;';
+                musicBtn.classList.remove('off');
+            } else {
+                bgm.pause();
+                musicBtn.innerHTML = '&#x1F507;';
+                musicBtn.classList.add('off');
+            }
         }
+
         function tryStartMusic() {
-            if (!musicOn) { musicOn = true; bgm.play().catch(() => {}); musicBtn.textContent = '����'; musicBtn.classList.remove('off'); }
+            if (!musicOn) {
+                musicOn = true;
+                bgm.play().catch(() => {});
+                musicBtn.innerHTML = '&#x1F50A;';
+                musicBtn.classList.remove('off');
+            }
         }
         document.body.addEventListener('click', tryStartMusic, { once: true });
 
+        // 画布尺寸
         function resizeCanvas() {
             w = bgCanvas.width = fwCanvas.width = window.innerWidth;
             h = bgCanvas.height = fwCanvas.height = window.innerHeight;
@@ -213,10 +231,11 @@
         initBgParticles();
         (function animateBg() { bgCtx.clearRect(0,0,w,h); bgParticles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateBg); })();
 
-        const petalChars = ['����','����','����','����️','����','✿','❀','����','����','✨'];
+        // 花瓣
+        const petalChars = ['&#x1F338;','&#x1F33A;','&#x1F4AE;','&#x1F3F5;&#xFE0F;','&#x1F337;','&#x273F;','&#x2740;','&#x1F33C;','&#x1F342;','&#x2728;'];
         function createPetal() {
             const petal = document.createElement('span'); petal.classList.add('petal');
-            petal.textContent = petalChars[Math.floor(Math.random()*petalChars.length)];
+            petal.innerHTML = petalChars[Math.floor(Math.random()*petalChars.length)];
             petal.style.left = Math.random()*95+'%'; petal.style.fontSize = (Math.random()*1.4+0.9)+'rem';
             petal.style.animationDuration = (Math.random()*8+7)+'s'; petal.style.animationDelay = Math.random()*3+'s';
             petalsContainer.appendChild(petal);
@@ -225,28 +244,28 @@
         for (let i=0;i<20;i++) setTimeout(createPetal, i*350);
         setInterval(() => { if(petalsContainer.children.length<35) createPetal(); }, 1800);
 
-        // 20条随机祝福语（网页主角：冯佳敏）
+        // 烟花
         const fireworkBlessings = [
-            "祝你工作顺利，步步高升！����",
-            "愿你在社保中心发光发热，前程似锦！����",
-            "冯佳敏，新的起点，新的辉煌！加油！����",
-            "恭喜上岸！服务人民，温暖人心！����",
-            "祝贺你，未来可期，不忘初心！����",
-            "愿你的职业生涯一帆风顺，幸福常伴！����",
-            "金榜题名，实至名归！为你骄傲！����",
-            "祝事业有成，天天开心！����",
-            "感恩遇见，祝你前程万里，平安喜乐！����",
-            "所有的努力都值得，祝贺你！����",
-            "冯佳敏真棒，全家都为你高兴！����",
-            "愿你工作顺利，生活美满，越来越好！����",
-            "考上理想岗位，开启精彩人生！����",
-            "祝你新工作顺心，同事和睦，领导赏识！����",
-            "努力的人运气不会差，恭喜你！����",
-            "从此铁饭碗，安稳又体面，祝贺！����",
-            "愿你在新岗位上一展所长，大放异彩！����",
-            "祝贺冯佳敏，愿每一天都充实快乐！����",
-            "十年寒窗终有报，金榜题名在今朝！����",
-            "前程似锦，未来可期，加油冯佳敏！����"
+            "&#x1F386; 祝你工作顺利，步步高升！",
+            "&#x1F386; 愿你在社保中心发光发热，前程似锦！",
+            "&#x1F386; 冯佳敏，新的起点，新的辉煌！加油！",
+            "&#x1F386; 恭喜上岸！服务人民，温暖人心！",
+            "&#x1F386; 祝贺你，未来可期，不忘初心！",
+            "&#x1F386; 愿你的职业生涯一帆风顺，幸福常伴！",
+            "&#x1F386; 金榜题名，实至名归！为你骄傲！",
+            "&#x1F386; 祝事业有成，天天开心！",
+            "&#x1F386; 感恩遇见，祝你前程万里，平安喜乐！",
+            "&#x1F386; 所有的努力都值得，祝贺你！",
+            "&#x1F386; 冯佳敏真棒，全家都为你高兴！",
+            "&#x1F386; 愿你工作顺利，生活美满，越来越好！",
+            "&#x1F386; 考上理想岗位，开启精彩人生！",
+            "&#x1F386; 祝你新工作顺心，同事和睦，领导赏识！",
+            "&#x1F386; 努力的人运气不会差，恭喜你！",
+            "&#x1F386; 从此铁饭碗，安稳又体面，祝贺！",
+            "&#x1F386; 愿你在新岗位上一展所长，大放异彩！",
+            "&#x1F386; 祝贺冯佳敏，愿每一天都充实快乐！",
+            "&#x1F386; 十年寒窗终有报，金榜题名在今朝！",
+            "&#x1F386; 前程似锦，未来可期，加油冯佳敏！"
         ];
 
         function createFirework() {
@@ -271,9 +290,16 @@
             if (!fwAnimFrame) fwAnimFrame = requestAnimationFrame(animateFireworks);
             const clone = fireworkSound.cloneNode();
             clone.play().catch(() => {});
-            // 随机弹窗祝福语
+            // 随机弹窗祝福语（显示时解析实体）
             const randomBlessing = fireworkBlessings[Math.floor(Math.random() * fireworkBlessings.length)];
             showToast(randomBlessing);
+        }
+
+        function showToast(msg) {
+            clearTimeout(toastTimer);
+            toastEl.innerHTML = msg; // 用innerHTML解析实体
+            toastEl.classList.add('show');
+            toastTimer = setTimeout(() => toastEl.classList.remove('show'), 3000);
         }
 
         function animateFireworks(now) {
@@ -337,21 +363,17 @@
             else { fwAnimFrame = null; petalsContainer.style.display = ''; for (let i = 0; i < 15; i++) setTimeout(createPetal, i * 80); }
         }
 
-        function showToast(msg) {
-            clearTimeout(toastTimer);
-            toastEl.textContent = msg; toastEl.classList.add('show');
-            toastTimer = setTimeout(() => toastEl.classList.remove('show'), 3000);
-        }
-
+        // 分享功能
         const shareText = '热烈祝贺冯佳敏考上社会保险中心！金榜题名，前程似锦！';
         function openShareModal() { document.getElementById('shareModal').style.display='flex'; }
         function closeShareModal() { document.getElementById('shareModal').style.display='none'; }
         function copyShareText() {
             (navigator.clipboard?.writeText(shareText) || new Promise(r => { const t=document.createElement('textarea'); t.value=shareText; document.body.appendChild(t); t.select(); document.execCommand('copy'); document.body.removeChild(t); r(); }))
-            .then(() => { showToast('✅ 文案已复制！'); closeShareModal(); }).catch(() => showToast('���� 复制失败，请手动选择复制'));
+            .then(() => { showToast('&#x2705; 文案已复制！'); closeShareModal(); }).catch(() => showToast('&#x1F4CB; 复制失败，请手动选择复制'));
         }
         document.getElementById('shareModal').addEventListener('click', e => { if(e.target===e.currentTarget) closeShareModal(); });
 
+        // 祝福墙预设
         const presetBlessings = [
             "祝你工作顺利，步步高升  ---- ",
             "愿你在社保中心发光发热，前程似锦  ---- ",
@@ -386,15 +408,15 @@
             const { data, error } = await supabaseClient.from('blessings').select('*').order('created_at', { ascending: false });
             if(error) { blessingList.innerHTML='<p style="text-align:center;color:#c9b896;">加载失败</p>'; return; }
             if(!data.length) { blessingList.innerHTML='<p style="text-align:center;color:#c9b896;">还没有祝福，快来写下第一条吧！</p>'; return; }
-            blessingList.innerHTML = data.map(item => `<p style="animation:fadeIn 0.5s ease">���� ${item.content}</p>`).join('');
+            blessingList.innerHTML = data.map(item => `<p style="animation:fadeIn 0.5s ease">&#x1F49D; ${item.content}</p>`).join('');
         }
         async function addBlessing() {
             const text = blessingInput.value.trim();
-            if(!text) { showToast('���� 请选择或输入祝福语～'); return; }
+            if(!text) { showToast('&#x1F4AC; 请选择或输入祝福语～'); return; }
             const { error } = await supabaseClient.from('blessings').insert([{ content: text }]);
-            if(error) { showToast('❌ 发送失败'); return; }
+            if(error) { showToast('&#x274C; 发送失败'); return; }
             blessingInput.value = '';
-            showToast('���� 祝福已发送！');
+            showToast('&#x1F48C; 祝福已发送！');
             await loadBlessings();
             for(let i=0;i<5;i++) setTimeout(createPetal, i*60);
         }
