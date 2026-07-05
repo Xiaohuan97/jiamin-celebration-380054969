@@ -443,20 +443,21 @@
         for (let i=0;i<20;i++) setTimeout(createPetal, i*350);
         setInterval(() => { if(petalsContainer.children.length<35) createPetal(); }, 1800);
 
-        // 烟花
+        // ==================== 烟花（持续4-5秒，粒子消散更慢） ====================
         function triggerCelebration() {
             petalsContainer.style.display = 'none';
             const centerX = w / 2, centerY = h / 2;
             const fireworks = [];
-            for (let i = 0; i < 4; i++) {
+            for (let i = 0; i < 5; i++) {
                 const offsetX = (Math.random() - 0.5) * w * 0.5;
                 const offsetY = (Math.random() - 0.5) * h * 0.4;
                 const fw = {
                     x: centerX + offsetX, y: centerY + offsetY, particles: [],
-                    startTime: performance.now(), duration: 5000 + Math.random() * 1000,
+                    startTime: performance.now(),
+                    duration: 4000 + Math.random() * 1000, // 4-5秒
                     color: [`hsl(${Math.random()*30+15},95%,65%)`,`hsl(${Math.random()*20+350},90%,60%)`,`hsl(${Math.random()*15+40},100%,70%)`,`hsl(${Math.random()*10+10},90%,55%)`][Math.floor(Math.random()*4)],
                 };
-                const count = 250 + Math.floor(Math.random() * 150);
+                const count = 280 + Math.floor(Math.random() * 160);
                 for (let j = 0; j < count; j++) {
                     const angle = Math.random() * Math.PI * 2;
                     const speed = Math.random() * 10 + 3;
@@ -464,8 +465,9 @@
                         x: fw.x, y: fw.y,
                         vx: Math.cos(angle) * speed * (0.6 + Math.random()*0.4),
                         vy: Math.sin(angle) * speed * (0.6 + Math.random()*0.4),
-                        life: 1, decay: 0.008 + Math.random()*0.012,
-                        size: Math.random() * 3.5 + 2,
+                        life: 1,
+                        decay: 0.005 + Math.random() * 0.008, // 减慢衰减
+                        size: Math.random() * 4 + 2.5,
                     });
                 }
                 fireworks.push(fw);
@@ -479,30 +481,30 @@
                     active = true;
                     const progress = elapsed / fw.duration;
                     fw.particles.forEach(p => {
-                        p.x += p.vx * (1 - progress * 0.3);
-                        p.y += p.vy * (1 - progress * 0.3);
-                        p.vy += 0.03;
+                        p.x += p.vx * (1 - progress * 0.25);
+                        p.y += p.vy * (1 - progress * 0.25);
+                        p.vy += 0.02;
                         p.life -= p.decay;
-                        if (p.life > 0) {
+                        if (p.life > 0.05) {
                             fwCtx.beginPath(); fwCtx.arc(p.x, p.y, p.size, 0, Math.PI*2);
-                            fwCtx.fillStyle = fw.color.replace(')', `, ${p.life})`).replace('hsl', 'hsla');
+                            fwCtx.fillStyle = fw.color.replace(')', `, ${Math.min(p.life, 1)})`).replace('hsl', 'hsla');
                             fwCtx.fill();
-                            fwCtx.beginPath(); fwCtx.arc(p.x, p.y, p.size*2.2, 0, Math.PI*2);
-                            fwCtx.fillStyle = fw.color.replace(')', `, ${p.life*0.25})`).replace('hsl', 'hsla');
+                            fwCtx.beginPath(); fwCtx.arc(p.x, p.y, p.size * 2.5, 0, Math.PI*2);
+                            fwCtx.fillStyle = fw.color.replace(')', `, ${Math.min(p.life*0.3, 0.5)})`).replace('hsl', 'hsla');
                             fwCtx.fill();
                         }
                     });
-                    fw.particles = fw.particles.filter(p => p.life > 0);
+                    fw.particles = fw.particles.filter(p => p.life > 0.05);
                 });
                 if (active) {
                     requestAnimationFrame(drawFireworks);
                 } else {
                     petalsContainer.style.display = '';
-                    for(let i=0;i<15;i++) setTimeout(createPetal, i*80);
+                    for(let i=0;i<20;i++) setTimeout(createPetal, i*70);
                 }
             }
             requestAnimationFrame(drawFireworks);
-            for(let i=0;i<20;i++) setTimeout(createPetal, i*60);
+            for(let i=0;i<25;i++) setTimeout(createPetal, i*50);
             showToast('🎆 烟花绽放！祝贺佳敏！');
         }
 
