@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; style-src * 'unsafe-inline'; media-src *;">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎉 热烈祝贺冯佳敏 - 金榜题名</title>
+    <title>���� 热烈祝贺冯佳敏 - 金榜题名</title>
     <style>
         :root {
             --gold: #d4a843; --gold-light: #f0d78c; --red: #c41e3a;
@@ -66,7 +66,7 @@
         .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(200,150,50,0.6); }
         .btn-outline { background: transparent; border: 1.5px solid rgba(212,168,67,0.6); color: #f0d78c; }
         .btn-outline:hover { background: rgba(212,168,67,0.12); border-color: rgba(240,215,140,0.9); }
-        .toast { position: fixed; top: 30px; left: 50%; transform: translateX(-50%) translateY(-120px); background: rgba(40,20,10,0.95); border: 1px solid var(--gold); color: var(--gold-light); padding: 0.8rem 2rem; border-radius: 50px; font-size: 0.95rem; z-index: 300; backdrop-filter: blur(10px); transition: transform 0.5s cubic-bezier(0.175,0.885,0.32,1.275); pointer-events: none; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .toast { position: fixed; top: 30px; left: 50%; transform: translateX(-50%) translateY(-120px); background: rgba(40,20,10,0.95); border: 1px solid var(--gold); color: var(--gold-light); padding: 0.8rem 2rem; border-radius: 50px; font-size: 0.95rem; z-index: 300; backdrop-filter: blur(10px); transition: transform 0.5s cubic-bezier(0.175,0.885,0.32,1.275); pointer-events: none; box-shadow: 0 10px 30px rgba(0,0,0,0.5); text-align: center; max-width: 90vw; }
         .toast.show { transform: translateX(-50%) translateY(0); }
         .petals-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; }
         .petal { position: absolute; top: -60px; font-size: 1.4rem; animation: petalFall linear infinite; opacity: 0.75; pointer-events: none; }
@@ -80,7 +80,6 @@
         .share-text-box { background: rgba(20,10,5,0.8); border: 1px solid rgba(212,168,67,0.5); border-radius: 12px; padding: 1rem; color: #f0d78c; margin: 1rem 0; font-size: 0.95rem; line-height: 1.6; word-break: break-all; user-select: text; }
         @media (max-width: 600px) { .hero-card { padding: 2rem 1.5rem; } .name-display { font-size: 2.2rem; } .btn { padding: 0.55rem 1.2rem; font-size: 0.85rem; } }
 
-        /* 音乐开关 */
         .music-toggle {
             position: fixed; bottom: 20px; right: 20px; z-index: 400;
             background: rgba(0,0,0,0.6); border: 1px solid var(--gold-light);
@@ -97,49 +96,45 @@
     <canvas id="fireworksCanvas"></canvas>
     <div class="petals-container" id="petalsContainer"></div>
     <div class="toast" id="toast"></div>
-
-    <!-- 音乐开关按钮 -->
-    <div class="music-toggle off" id="musicBtn" onclick="toggleMusic()" title="音乐关">🔇</div>
+    <div class="music-toggle off" id="musicBtn" onclick="toggleMusic()" title="音乐关">����</div>
 
     <div class="main-container">
         <div class="top-ornament"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
         <div class="hero-card" id="heroCard">
-            <span class="corner-badge top-left">🏮</span><span class="corner-badge top-right">🏮</span>
+            <span class="corner-badge top-left">����</span><span class="corner-badge top-right">����</span>
             <span class="corner-badge bottom-left">✨</span><span class="corner-badge bottom-right">✨</span>
-            <div class="label-badge">🎊 金 榜 题 名 🎊</div>
+            <div class="label-badge">���� 金 榜 题 名 ����</div>
             <div class="name-display">冯 佳 敏</div>
             <div class="congrats-text">热烈祝贺 · 成功上岸</div>
             <div class="sub-text">以梦为马，不负韶华</div>
             <div class="divider-ornament"><span></span><span class="star">✦</span><span></span></div>
-            <div class="unit-highlight"><span class="icon">🏛️</span> 社会保险中心</div>
+            <div class="unit-highlight"><span class="icon">����️</span> 社会保险中心</div>
             <p class="blessing-quote">"愿你在这个岗位上发光发热，<br>服务民生，温暖人心。<br>初心如磐，笃行致远，<br>未来可期，前程似锦！"</p>
             <div class="divider-ornament"><span></span><span class="star">❋</span><span></span></div>
             <div class="action-buttons">
-                <button class="btn btn-primary" onclick="triggerCelebration()">🎆 放烟花</button>
-                <button class="btn btn-gold" onclick="openShareModal()">📤 分享喜讯</button>
-                <button class="btn btn-outline" onclick="showBlessingWall()">💌 祝福墙</button>
+                <button class="btn btn-primary" onclick="triggerCelebration()">���� 放烟花</button>
+                <button class="btn btn-gold" onclick="openShareModal()">���� 分享喜讯</button>
+                <button class="btn btn-outline" onclick="showBlessingWall()">���� 祝福墙</button>
             </div>
         </div>
         <div class="top-ornament" style="margin-top:0.5rem;"><span class="line"></span><span class="diamond" style="animation-delay:1s;"></span><span class="line"></span></div>
         <p style="font-size:0.8rem;color:rgba(200,180,150,0.5);letter-spacing:0.08em;">— 全家为你骄傲 · 2026 —</p>
     </div>
 
-    <!-- 分享弹窗 -->
     <div id="shareModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:50;background:rgba(0,0,0,0.75);justify-content:center;align-items:center;padding:1rem;">
         <div class="modal-content">
             <button onclick="closeShareModal()" style="position:absolute;top:12px;right:16px;background:none;border:none;color:var(--gold-light);font-size:1.5rem;cursor:pointer;">✕</button>
-            <h3 style="color:var(--gold-light);letter-spacing:0.1em;margin-bottom:0.5rem;">🎉 分享喜讯</h3>
+            <h3 style="color:var(--gold-light);letter-spacing:0.1em;margin-bottom:0.5rem;">���� 分享喜讯</h3>
             <p style="color:#c9b896;font-size:0.9rem;">复制下方文案，发送给亲朋好友吧～</p>
             <div class="share-text-box" id="shareTextContent">热烈祝贺冯佳敏考上社会保险中心！金榜题名，前程似锦！</div>
-            <button class="btn btn-gold" onclick="copyShareText()" style="margin-top:0.5rem;">📋 复制文案</button>
+            <button class="btn btn-gold" onclick="copyShareText()" style="margin-top:0.5rem;">���� 复制文案</button>
         </div>
     </div>
 
-    <!-- 祝福墙弹窗 -->
     <div id="blessingModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:50;background:rgba(0,0,0,0.75);justify-content:center;align-items:center;padding:1rem;">
         <div class="modal-content">
             <button onclick="closeBlessingWall()" style="position:absolute;top:12px;right:16px;background:none;border:none;color:var(--gold-light);font-size:1.5rem;cursor:pointer;">✕</button>
-            <h3 style="color:var(--gold-light);letter-spacing:0.1em;margin-bottom:1rem;">💌 祝福留言墙</h3>
+            <h3 style="color:var(--gold-light);letter-spacing:0.1em;margin-bottom:1rem;">���� 祝福留言墙</h3>
             <div id="blessingList" style="max-height:250px;overflow-y:auto;text-align:left;padding:0.5rem;color:#d5c0a0;font-size:0.9rem;line-height:1.8;"><p style="text-align:center;color:#c9b896;">加载中...</p></div>
             <div style="margin-top:1rem;display:flex;gap:0.5rem;align-items:flex-start;">
                 <div class="input-wrapper" style="flex:1;">
@@ -153,7 +148,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        // Supabase
         const SUPABASE_URL = 'https://mikhclpvqcwhrpjhfjgi.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_0nT16pm_-1xtxD-B4vzq2g_KrGc4tDc';
         const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -174,40 +168,23 @@
         const fireworks = [];
         let fwAnimFrame = null;
 
-        // 音频
         const bgm = new Audio('bgm.mp3');
         bgm.loop = true;
         bgm.volume = 0.3;
         const fireworkSound = new Audio('firework.mp3');
         fireworkSound.volume = 0.8;
-
         let musicOn = false;
 
         function toggleMusic() {
             musicOn = !musicOn;
-            if (musicOn) {
-                bgm.play().catch(() => {});
-                musicBtn.textContent = '🔊';
-                musicBtn.classList.remove('off');
-            } else {
-                bgm.pause();
-                musicBtn.textContent = '🔇';
-                musicBtn.classList.add('off');
-            }
+            if (musicOn) { bgm.play().catch(() => {}); musicBtn.textContent = '����'; musicBtn.classList.remove('off'); }
+            else { bgm.pause(); musicBtn.textContent = '����'; musicBtn.classList.add('off'); }
         }
-
-        // 首次用户交互启动音乐（规避自动播放限制）
         function tryStartMusic() {
-            if (!musicOn) {
-                musicOn = true;
-                bgm.play().catch(() => {});
-                musicBtn.textContent = '🔊';
-                musicBtn.classList.remove('off');
-            }
+            if (!musicOn) { musicOn = true; bgm.play().catch(() => {}); musicBtn.textContent = '����'; musicBtn.classList.remove('off'); }
         }
         document.body.addEventListener('click', tryStartMusic, { once: true });
 
-        // Canvas尺寸
         function resizeCanvas() {
             w = bgCanvas.width = fwCanvas.width = window.innerWidth;
             h = bgCanvas.height = fwCanvas.height = window.innerHeight;
@@ -236,7 +213,7 @@
         initBgParticles();
         (function animateBg() { bgCtx.clearRect(0,0,w,h); bgParticles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateBg); })();
 
-        const petalChars = ['🌸','🌺','💮','🏵️','🌷','✿','❀','🌼','🍂','✨'];
+        const petalChars = ['����','����','����','����️','����','✿','❀','����','����','✨'];
         function createPetal() {
             const petal = document.createElement('span'); petal.classList.add('petal');
             petal.textContent = petalChars[Math.floor(Math.random()*petalChars.length)];
@@ -248,7 +225,30 @@
         for (let i=0;i<20;i++) setTimeout(createPetal, i*350);
         setInterval(() => { if(petalsContainer.children.length<35) createPetal(); }, 1800);
 
-        // 烟花
+        // 20条随机祝福语（网页主角：冯佳敏）
+        const fireworkBlessings = [
+            "祝你工作顺利，步步高升！����",
+            "愿你在社保中心发光发热，前程似锦！����",
+            "冯佳敏，新的起点，新的辉煌！加油！����",
+            "恭喜上岸！服务人民，温暖人心！����",
+            "祝贺你，未来可期，不忘初心！����",
+            "愿你的职业生涯一帆风顺，幸福常伴！����",
+            "金榜题名，实至名归！为你骄傲！����",
+            "祝事业有成，天天开心！����",
+            "感恩遇见，祝你前程万里，平安喜乐！����",
+            "所有的努力都值得，祝贺你！����",
+            "冯佳敏真棒，全家都为你高兴！����",
+            "愿你工作顺利，生活美满，越来越好！����",
+            "考上理想岗位，开启精彩人生！����",
+            "祝你新工作顺心，同事和睦，领导赏识！����",
+            "努力的人运气不会差，恭喜你！����",
+            "从此铁饭碗，安稳又体面，祝贺！����",
+            "愿你在新岗位上一展所长，大放异彩！����",
+            "祝贺冯佳敏，愿每一天都充实快乐！����",
+            "十年寒窗终有报，金榜题名在今朝！����",
+            "前程似锦，未来可期，加油冯佳敏！����"
+        ];
+
         function createFirework() {
             const x_start = Math.random() * w * 0.8 + w * 0.1;
             const y_start = h + 20;
@@ -269,10 +269,11 @@
             fireworks.push(createFirework());
             petalsContainer.style.display = 'none';
             if (!fwAnimFrame) fwAnimFrame = requestAnimationFrame(animateFireworks);
-            // 播放烟花音效（克隆避免重叠冲突）
             const clone = fireworkSound.cloneNode();
             clone.play().catch(() => {});
-            showToast('🎆 烟花发射！');
+            // 随机弹窗祝福语
+            const randomBlessing = fireworkBlessings[Math.floor(Math.random() * fireworkBlessings.length)];
+            showToast(randomBlessing);
         }
 
         function animateFireworks(now) {
@@ -332,19 +333,14 @@
                     anyActive = true;
                 }
             }
-            if (anyActive) {
-                fwAnimFrame = requestAnimationFrame(animateFireworks);
-            } else {
-                fwAnimFrame = null;
-                petalsContainer.style.display = '';
-                for (let i = 0; i < 15; i++) setTimeout(createPetal, i * 80);
-            }
+            if (anyActive) { fwAnimFrame = requestAnimationFrame(animateFireworks); }
+            else { fwAnimFrame = null; petalsContainer.style.display = ''; for (let i = 0; i < 15; i++) setTimeout(createPetal, i * 80); }
         }
 
         function showToast(msg) {
             clearTimeout(toastTimer);
             toastEl.textContent = msg; toastEl.classList.add('show');
-            toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2200);
+            toastTimer = setTimeout(() => toastEl.classList.remove('show'), 3000);
         }
 
         const shareText = '热烈祝贺冯佳敏考上社会保险中心！金榜题名，前程似锦！';
@@ -352,7 +348,7 @@
         function closeShareModal() { document.getElementById('shareModal').style.display='none'; }
         function copyShareText() {
             (navigator.clipboard?.writeText(shareText) || new Promise(r => { const t=document.createElement('textarea'); t.value=shareText; document.body.appendChild(t); t.select(); document.execCommand('copy'); document.body.removeChild(t); r(); }))
-            .then(() => { showToast('✅ 文案已复制！'); closeShareModal(); }).catch(() => showToast('📋 复制失败，请手动选择复制'));
+            .then(() => { showToast('✅ 文案已复制！'); closeShareModal(); }).catch(() => showToast('���� 复制失败，请手动选择复制'));
         }
         document.getElementById('shareModal').addEventListener('click', e => { if(e.target===e.currentTarget) closeShareModal(); });
 
@@ -366,7 +362,17 @@
             "金榜题名，实至名归！为你骄傲  ---- ",
             "祝事业有成，天天开心  ---- ",
             "感恩遇见，祝你前程万里，平安喜乐  ---- ",
-            "所有的努力都值得，祝贺你！  ---- "
+            "所有的努力都值得，祝贺你！  ---- ",
+            "佳敏真棒，全家都为你高兴  ---- ",
+            "愿你工作顺利，生活美满，越来越好  ---- ",
+            "考上理想岗位，开启精彩人生  ---- ",
+            "祝你新工作顺心，同事和睦，领导赏识  ---- ",
+            "努力的人运气不会差，恭喜你  ---- ",
+            "从此铁饭碗，安稳又体面，祝贺  ---- ",
+            "愿你在新岗位上一展所长，大放异彩  ---- ",
+            "祝贺佳敏，愿每一天都充实快乐  ---- ",
+            "十年寒窗终有报，金榜题名在今朝  ---- ",
+            "前程似锦，未来可期，加油佳敏  ---- "
         ];
         presetBlessings.forEach(text => {
             const div = document.createElement('div'); div.className = 'preset-item'; div.textContent = text;
@@ -380,15 +386,15 @@
             const { data, error } = await supabaseClient.from('blessings').select('*').order('created_at', { ascending: false });
             if(error) { blessingList.innerHTML='<p style="text-align:center;color:#c9b896;">加载失败</p>'; return; }
             if(!data.length) { blessingList.innerHTML='<p style="text-align:center;color:#c9b896;">还没有祝福，快来写下第一条吧！</p>'; return; }
-            blessingList.innerHTML = data.map(item => `<p style="animation:fadeIn 0.5s ease">💝 ${item.content}</p>`).join('');
+            blessingList.innerHTML = data.map(item => `<p style="animation:fadeIn 0.5s ease">���� ${item.content}</p>`).join('');
         }
         async function addBlessing() {
             const text = blessingInput.value.trim();
-            if(!text) { showToast('💬 请选择或输入祝福语～'); return; }
+            if(!text) { showToast('���� 请选择或输入祝福语～'); return; }
             const { error } = await supabaseClient.from('blessings').insert([{ content: text }]);
             if(error) { showToast('❌ 发送失败'); return; }
             blessingInput.value = '';
-            showToast('💌 祝福已发送！');
+            showToast('���� 祝福已发送！');
             await loadBlessings();
             for(let i=0;i<5;i++) setTimeout(createPetal, i*60);
         }
